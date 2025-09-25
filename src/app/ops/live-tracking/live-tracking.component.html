@@ -1,0 +1,56 @@
+<h1>Live Fleet Tracking</h1>
+
+<div class="grid" style="grid-template-columns: 2fr 1fr; gap: 16px">
+  <div
+    class="card"
+    style="
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+    "
+  >
+    <strong>📡 Live GPS Tracking Map</strong>
+  </div>
+
+  <div class="card">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <h3>Active Trucks</h3>
+      <button mat-stroked-button (click)="refresh()">Refresh</button>
+    </div>
+
+    <table mat-table [dataSource]="rows()">
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef>Truck</th>
+        <td mat-cell *matCellDef="let r">{{ r.code }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="driver">
+        <th mat-header-cell *matHeaderCellDef>Driver</th>
+        <td mat-cell *matCellDef="let r">{{ r.driver }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let r">
+          <span
+            class="chip"
+            [class.chip--ok]="r.status === 'Moving'"
+            [class.chip--warn]="r.status === 'Stopped'"
+            [class.chip--info]="r.status === 'Idle'"
+            >{{ r.status }}</span
+          >
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="last">
+        <th mat-header-cell *matHeaderCellDef>Last Update</th>
+        <td mat-cell *matCellDef="let r">{{ r.lastUpdate }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="cols"></tr>
+      <tr mat-row *matRowDef="let row; columns: cols"></tr>
+    </table>
+  </div>
+</div>

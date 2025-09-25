@@ -1,0 +1,41 @@
+<mat-sidenav-container class="h-full">
+  <mat-sidenav mode="side" [opened]="true" style="width: 250px; background: #f0f4f8">
+    <mat-nav-list>
+      <div class="mat-subheader">MANAGEMENT</div>
+      <a mat-list-item routerLink="/ops/dashboard" routerLinkActive="active">Overview</a>
+      <a mat-list-item routerLink="/ops/customers" routerLinkActive="active">Customers & Sites</a>
+      <a mat-list-item routerLink="/ops/drivers" routerLinkActive="active">Drivers & CDL</a>
+      <a mat-list-item routerLink="/ops/fleet" routerLinkActive="active">Truck Fleet</a>
+      <a mat-list-item routerLink="/ops/disposal" routerLinkActive="active">Disposal Sites</a>
+      <div class="mat-subheader">OPERATIONS</div>
+      <a mat-list-item routerLink="/ops/route-planning" routerLinkActive="active">Route Planning</a>
+      <a mat-list-item routerLink="/ops/service-queue" routerLinkActive="active">Service Queue</a>
+      <a mat-list-item routerLink="/ops/schedule" routerLinkActive="active">Schedule</a>
+      <a mat-list-item routerLink="/ops/live-tracking" routerLinkActive="active">Live Tracking</a>
+      <div class="mat-subheader">BUSINESS</div>
+      <a mat-list-item routerLink="/ops/billing" routerLinkActive="active">Billing</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" style="position: sticky; top: 0; z-index: 10">
+      <div class="company-title-container">
+        <span class="material-symbols-outlined truck-logo"> local_shipping </span>
+        <span class="company-title">WasteRoute Pro</span>
+      </div>
+      <span class="spacer"></span>
+      <button
+        mat-stroked-button
+        routerLink="/ops/customer-portal"
+        routerLinkActive="active"
+        class="cstmr-portal-btn"
+      >
+        Customer Portal
+      </button>
+    </mat-toolbar>
+
+    <div style="padding: 24px">
+      <router-outlet />
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

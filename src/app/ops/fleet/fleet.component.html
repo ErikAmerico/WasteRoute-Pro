@@ -1,0 +1,53 @@
+<h1>Fleet Overview</h1>
+
+<div class="grid" style="grid-template-columns: repeat(4, minmax(0, 1fr))">
+  <div class="card">
+    <div class="muted">TOTAL FLEET</div>
+    <div style="font-size: 36px; font-weight: 800">{{ totals().fleet }}</div>
+  </div>
+  <div class="card">
+    <div class="muted">ACTIVE TODAY</div>
+    <div style="font-size: 36px; font-weight: 800">{{ totals().active }}</div>
+    <div class="chip chip--info">{{ totals().utilization }} utilization</div>
+  </div>
+  <div class="card">
+    <div class="muted">MAINTENANCE</div>
+    <div style="font-size: 36px; font-weight: 800">{{ totals().maintenance }}</div>
+    <div class="chip chip--warn">Scheduled this week</div>
+  </div>
+  <div class="card">
+    <div class="muted">FUEL COSTS</div>
+    <div style="font-size: 36px; font-weight: 800">{{ totals().fuel }}</div>
+    <div class="chip chip--ok">This week</div>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 16px">
+  <h3>Fleet Performance Metrics</h3>
+  <table class="mat-elevation-z0" style="width: 100%">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>This Week</th>
+        <th>Last Week</th>
+        <th>Change</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (m of metrics(); track m.label) {
+      <tr>
+        <td>{{ m.label }}</td>
+        <td>{{ m.current }}</td>
+        <td>{{ m.previous ?? '—' }}</td>
+        <td>
+          @if (m.change) {
+          <span class="chip" [class.chip--ok]="m.changeGood" [class.chip--bad]="!m.changeGood">
+            {{ m.change }}
+          </span>
+          } @else { — }
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

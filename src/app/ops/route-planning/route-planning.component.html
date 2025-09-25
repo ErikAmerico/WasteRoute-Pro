@@ -1,0 +1,68 @@
+<h1>Route Planning & Optimization</h1>
+
+<div class="grid" style="grid-template-columns: 380px 1fr">
+  <div class="card">
+    <h3>Route Builder</h3>
+    <form [formGroup]="form" class="grid" style="grid-template-columns: 1fr">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Date</mat-label>
+        <input matInput [matDatepicker]="dp" formControlName="date" />
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Available Drivers</mat-label>
+        <mat-select formControlName="driver">
+          @for (d of drivers(); track d.id) {
+          <mat-option [value]="d.id">{{ d.name }} ({{ d.hrs }} hrs)</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Available Trucks</mat-label>
+        <mat-select formControlName="truck">
+          @for (t of trucks(); track t.id) {
+          <mat-option [value]="t.id">{{ t.code }} - {{ t.kind }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <button type="button" mat-raised-button color="primary" (click)="optimize()">
+        Optimize Route
+      </button>
+    </form>
+  </div>
+
+  <div
+    class="card"
+    style="
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+    "
+  >
+    <strong>🗺️ Interactive Map View</strong>
+  </div>
+</div>
+
+<div class="card stops">
+  <h3>Scheduled Stops</h3>
+
+  @for (s of scheduled(); track s.id; let i = $index) {
+  <div class="stop-row">
+    <div class="stop-title">
+      @if (s.kind === 'final') { Final: {{ s.name }} } @else { Stop {{ i + 1 }}: {{ s.name }}
+      }
+    </div>
+    <div class="stop-sub">
+      @if (s.kind === 'timed') { <span>⏰</span> } @if (s.kind === 'normal') { <span>📍</span> } @if
+      (s.kind === 'final') { <span>🏁</span> }
+      <span>{{ s.note }}</span>
+    </div>
+  </div>
+  }
+</div>

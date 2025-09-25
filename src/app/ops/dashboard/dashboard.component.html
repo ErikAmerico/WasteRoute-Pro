@@ -1,0 +1,80 @@
+<h1>Dashboard Overview</h1>
+<p class="muted">Real-time operations and performance metrics</p>
+
+<div class="grid" style="grid-template-columns: repeat(4, minmax(0, 1fr))">
+  <div class="card">
+    <div class="muted">ACTIVE ROUTES</div>
+    <div style="font-size: 36px; font-weight: 800">15</div>
+    <div class="chip chip--ok">↑ 3 from yesterday</div>
+  </div>
+  <div class="card">
+    <div class="muted">TRUCKS AVAILABLE</div>
+    <div style="font-size: 36px; font-weight: 800">18/25</div>
+    <div class="chip chip--info">7 in maintenance</div>
+  </div>
+  <div class="card">
+    <div class="muted">PENDING SERVICES</div>
+    <div style="font-size: 36px; font-weight: 800">47</div>
+    <div class="chip chip--ok">23 scheduled today</div>
+  </div>
+  <div class="card">
+    <div class="muted">DRIVER HOURS</div>
+    <div style="font-size: 36px; font-weight: 800">386</div>
+    <div class="chip chip--info">Available this week</div>
+  </div>
+</div>
+
+<div class="grid" style="grid-template-columns: 2fr 1fr; margin-top: 16px">
+  <div class="card">
+    <h3>Today's Routes</h3>
+    <table mat-table [dataSource]="routes()">
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef>Route</th>
+        <td mat-cell *matCellDef="let r">{{ r.code }}</td>
+      </ng-container>
+      <ng-container matColumnDef="driver">
+        <th mat-header-cell *matHeaderCellDef>Driver</th>
+        <td mat-cell *matCellDef="let r">{{ r.driver }}</td>
+      </ng-container>
+      <ng-container matColumnDef="truck">
+        <th mat-header-cell *matHeaderCellDef>Truck</th>
+        <td mat-cell *matCellDef="let r">{{ r.truck }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let r">
+          <span
+            class="chip"
+            [class.chip--ok]="r.status === 'Active'"
+            [class.chip--warn]="r.status === 'Delayed'"
+            >{{ r.status }}</span
+          >
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="cols"></tr>
+      <tr mat-row *matRowDef="let row; columns: cols"></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Service Queue</h3>
+    @for (q of queue(); track q.title) {
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
+      "
+    >
+      <div>
+        <div style="font-weight: 700">{{ q.title }}</div>
+        <div class="muted">{{ q.subtitle }}</div>
+      </div>
+      <button mat-raised-button color="primary">View Queue</button>
+    </div>
+    }
+  </div>
+</div>

@@ -1,1 +1,107 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@include mat.core();
+
+$wrp-navy-palette: (
+  50: #ebeff2,
+  100: #ccd5dd,
+  200: #aab9c6,
+  300: #879dad,
+  400: #6c8699,
+  500: #546e82,
+  600: #455a6a,
+  700: #3a4c59,
+  800: #2f3e4a,
+  900: #2c3e50,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+  ),
+);
+
+// $primary: mat.m2-define-palette(mat.$m2-indigo-palette, 600);
+$primary: mat.m2-define-palette($wrp-navy-palette, 900);
+$accent: mat.m2-define-palette(mat.$m2-blue-palette, 600);
+$warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    ),
+    typography: mat.m2-define-typography-config(),
+  )
+);
+
+@include mat.all-component-themes($theme);
+
+body {
+  color-scheme: light;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+html,
+body,
+app-root {
+  height: 100%;
+}
+body {
+  background: #f5f7fb;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+:root {
+  --accent-600: #{mat.m2-get-color-from-palette($accent, 600)};
+  --accent-700: #{mat.m2-get-color-from-palette($accent, 700)};
+  --accent-contrast-500: #{mat.m2-get-contrast-color-from-palette($accent, 600)};
+}
+
+.chip {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 12px;
+  display: inline-block;
+}
+.chip--ok {
+  background: #e9f7ef;
+  color: #2e7d32;
+}
+.chip--warn {
+  background: #fff4e5;
+  color: #a15c00;
+}
+.chip--info {
+  background: #e6f2ff;
+  color: #0b62a4;
+}
+.chip--bad {
+  background: #fdecee;
+  color: #a50e2d;
+}
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+}
+.grid {
+  display: grid;
+  gap: 16px;
+}
+.muted {
+  color: #6b7280;
+}

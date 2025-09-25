@@ -1,0 +1,46 @@
+.h-full {
+  height: 100%;
+}
+.spacer {
+  flex: 1;
+}
+
+a {
+  opacity: 0.7;
+}
+
+.mat-subheader {
+  padding: 8px 16px;
+  font-weight: 700;
+}
+
+.company-title-container {
+  padding: 16px;
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.truck-logo {
+  color: #4caf50;
+  font-size: 50px;
+}
+
+.company-title {
+  font-size: 24px;
+}
+
+.cstmr-portal-btn {
+  background-color: var(--accent-600);
+  color: var(--accent-contrast-600);
+}
+
+.cstmr-portal-btn:hover {
+  background-color: var(--accent-700);
+}
+.cstmr-portal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,0 +1,21 @@
+.stops {
+  margin-top: 16px;
+}
+.stop-row {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 14px 16px;
+  border-left: 6px solid #dbeafe; /* blue-100 */
+}
+.stop-row + .stop-row {
+  margin-top: 12px;
+}
+.stop-title {
+  font-weight: 700;
+}
+.stop-sub {
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
