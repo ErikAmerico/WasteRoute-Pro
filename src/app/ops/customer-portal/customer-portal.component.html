@@ -1,0 +1,128 @@
+<h1>Customer Portal</h1>
+<p class="muted">Customer-facing service request interface</p>
+
+<div class="hero">
+  <div>
+    <h2 style="margin: 0">Welcome to WasteRoute Pro</h2>
+    <div style="color: #e9eafc">
+      Request waste collection services online – Quick, Easy, Reliable
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 16px">
+  <h3>Select Service Type</h3>
+  <div class="option-grid">
+    <div
+      class="card-option"
+      [class.active]="service() === 'rolloff'"
+      (click)="selectService('rolloff')"
+    >
+      <div style="font-size: 40px">🏗️</div>
+      <div style="font-weight: 700">Roll-Off Container</div>
+      <div class="muted">For construction and large projects</div>
+    </div>
+    <div
+      class="card-option"
+      [class.active]="service() === 'commercial'"
+      (click)="selectService('commercial')"
+    >
+      <div style="font-size: 40px">🏢</div>
+      <div style="font-weight: 700">Commercial Pickup</div>
+      <div class="muted">Regular business collection</div>
+    </div>
+    <div
+      class="card-option"
+      [class.active]="service() === 'residential'"
+      (click)="selectService('residential')"
+    >
+      <div style="font-size: 40px">🏠</div>
+      <div style="font-weight: 700">Residential Service</div>
+      <div class="muted">Home waste collection</div>
+    </div>
+    <div
+      class="card-option"
+      [class.active]="service() === 'special'"
+      (click)="selectService('special')"
+    >
+      <div style="font-size: 40px">♻️</div>
+      <div style="font-weight: 700">Special Pickup</div>
+      <div class="muted">One-time or special requests</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 16px">
+  <h3>Container Sizes Available</h3>
+  <div class="sizes-grid">
+    <div class="size-pill" [class.active]="container() === '2yd'" (click)="selectContainer('2yd')">
+      <div style="font-weight: 700">2 Yard</div>
+      <div class="muted">Small businesses, restaurants</div>
+    </div>
+    <div class="size-pill" [class.active]="container() === '4yd'" (click)="selectContainer('4yd')">
+      <div style="font-weight: 700">4 Yard</div>
+      <div class="muted">Medium businesses, retail</div>
+    </div>
+    <div class="size-pill" [class.active]="container() === '6yd'" (click)="selectContainer('6yd')">
+      <div style="font-weight: 700">6 Yard</div>
+      <div class="muted">Large businesses, offices</div>
+    </div>
+    <div class="size-pill" [class.active]="container() === '8yd'" (click)="selectContainer('8yd')">
+      <div style="font-weight: 700">8 Yard</div>
+      <div class="muted">Warehouses, industrial</div>
+    </div>
+    <div
+      class="size-pill"
+      [class.active]="container() === '20yd-rolloff'"
+      (click)="selectContainer('20yd-rolloff')"
+    >
+      <div style="font-weight: 700">20 Yard Roll-Off</div>
+      <div class="muted">Small construction projects</div>
+    </div>
+    <div
+      class="size-pill"
+      [class.active]="container() === '40yd-rolloff'"
+      (click)="selectContainer('40yd-rolloff')"
+    >
+      <div style="font-weight: 700">40 Yard Roll-Off</div>
+      <div class="muted">Large construction/demolition</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 16px">
+  <h3>Request Service</h3>
+
+  <form [formGroup]="form" class="grid" style="grid-template-columns: 1fr; gap: 12px">
+    <mat-form-field appearance="outline">
+      <mat-label>Business Name</mat-label>
+      <input matInput placeholder="Enter your business name" formControlName="businessName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Service Address</mat-label>
+      <input matInput placeholder="Enter service address" formControlName="address" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Preferred Time Window</mat-label>
+      <mat-select formControlName="window">
+        <mat-option value="am">Morning (6AM - 12PM)</mat-option>
+        <mat-option value="mid">Midday (10AM - 2PM)</mat-option>
+        <mat-option value="pm">Afternoon (12PM - 6PM)</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div style="display: flex; gap: 12px">
+      <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="submit()">
+        Submit Request
+      </button>
+      <button mat-stroked-button type="button" (click)="reset()">Reset</button>
+    </div>
+  </form>
+
+  <div class="muted" style="margin-top: 12px">
+    Selected: <strong>{{ service() | titlecase }}</strong> @if (container()) { •
+    <strong>{{ prettyContainer() }}</strong> }
+  </div>
+</div>

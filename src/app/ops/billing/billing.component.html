@@ -1,0 +1,55 @@
+<h1>Billing</h1>
+
+<div class="grid gtc1-1">
+  <div class="card">
+    <h3>Contracts & Rate Cards</h3>
+    <p class="muted">Configure billing by service type, container size, and contract terms.</p>
+    <button mat-raised-button color="primary">Manage Rate Cards</button>
+  </div>
+
+  <div class="card">
+    <h3>Uninvoiced Work</h3>
+    <p class="muted">Work completed that hasn’t been invoiced yet.</p>
+    <button mat-stroked-button>Create Invoice</button>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 16px">
+  <h3>Recent Invoice Lines</h3>
+
+  <table mat-table [dataSource]="lines()">
+    <ng-container matColumnDef="date"
+      ><th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let l">{{ l.date }}</td></ng-container
+    >
+    <ng-container matColumnDef="route"
+      ><th mat-header-cell *matHeaderCellDef>Route</th>
+      <td mat-cell *matCellDef="let l">{{ l.route }}</td></ng-container
+    >
+    <ng-container matColumnDef="customer"
+      ><th mat-header-cell *matHeaderCellDef>Customer</th>
+      <td mat-cell *matCellDef="let l">{{ l.customer }}</td></ng-container
+    >
+    <ng-container matColumnDef="service"
+      ><th mat-header-cell *matHeaderCellDef>Service</th>
+      <td mat-cell *matCellDef="let l">{{ l.service }}</td></ng-container
+    >
+    <ng-container matColumnDef="qty"
+      ><th mat-header-cell *matHeaderCellDef>Qty</th>
+      <td mat-cell *matCellDef="let l">{{ l.qty }}</td></ng-container
+    >
+    <ng-container matColumnDef="rate"
+      ><th mat-header-cell *matHeaderCellDef>Rate</th>
+      <td mat-cell *matCellDef="let l">{{ l.rate }}</td></ng-container
+    >
+    <ng-container matColumnDef="total"
+      ><th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let l">
+        <strong>{{ l.total }}</strong>
+      </td></ng-container
+    >
+
+    <tr mat-header-row *matHeaderRowDef="cols"></tr>
+    <tr mat-row *matRowDef="let row; columns: cols"></tr>
+  </table>
+</div>

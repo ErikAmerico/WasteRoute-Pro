@@ -1,0 +1,43 @@
+<h1>Disposal Sites</h1>
+<div class="card">
+  <div class="grid" style="grid-template-columns: 1fr auto; align-items: center">
+    <h3>Registered Disposal Sites</h3>
+    <button mat-raised-button color="primary">+ Add Site</button>
+  </div>
+
+  <table mat-table [dataSource]="rows()">
+    <ng-container matColumnDef="name"
+      ><th mat-header-cell *matHeaderCellDef>Site Name</th>
+      <td mat-cell *matCellDef="let r">{{ r.name }}</td></ng-container
+    >
+    <ng-container matColumnDef="type"
+      ><th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let r">{{ r.type }}</td></ng-container
+    >
+    <ng-container matColumnDef="addr"
+      ><th mat-header-cell *matHeaderCellDef>Address</th>
+      <td mat-cell *matCellDef="let r">{{ r.addr }}</td></ng-container
+    >
+    <ng-container matColumnDef="hours"
+      ><th mat-header-cell *matHeaderCellDef>Hours</th>
+      <td mat-cell *matCellDef="let r">{{ r.hours }}</td></ng-container
+    >
+    <ng-container matColumnDef="materials"
+      ><th mat-header-cell *matHeaderCellDef>Accepted Materials</th>
+      <td mat-cell *matCellDef="let r">{{ r.materials }}</td></ng-container
+    >
+    <ng-container matColumnDef="dist"
+      ><th mat-header-cell *matHeaderCellDef>Distance</th>
+      <td mat-cell *matCellDef="let r">{{ r.dist }}</td></ng-container
+    >
+    <ng-container matColumnDef="act"
+      ><th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let r">
+        <button mat-stroked-button>Edit</button>
+      </td></ng-container
+    >
+
+    <tr mat-header-row *matHeaderRowDef="cols"></tr>
+    <tr mat-row *matRowDef="let row; columns: cols"></tr>
+  </table>
+</div>
