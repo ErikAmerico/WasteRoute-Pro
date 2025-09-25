@@ -3,6 +3,12 @@ import { authGuard } from './core/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'ops', pathMatch: 'full' },
+  //delete notes below (and its component files under app/_notes) once everyone has an understanding of the project
+  {
+    path: 'notes',
+    loadComponent: () => import('./_notes/notes.component').then((m) => m.NotesComponent),
+  },
+  //delete notes above (and its component files under app/_notes) once everyone has an understanding of the project
   {
     path: 'ops',
     canActivate: [authGuard(['dispatcher', 'billing', 'admin'])],
